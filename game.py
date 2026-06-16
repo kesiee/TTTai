@@ -8,6 +8,7 @@ from pathlib import Path
 
 import yaml
 from llmgate import LLMGate
+from llmgate.exceptions import LLMGateError
 
 from agent import LLMAgent
 from board import Board
@@ -138,7 +139,14 @@ def play() -> None:
             board.place(move, human)
         else:
             print(f"AI ({ai_mark}) thinking...")
-            move, reason = agent.choose_move(board)
+            try:
+                move, reason = agent.choose_move(board)
+            except LLMGateError as err:
+                print(f"\n!! LLM call failed ({type(err).__name__}).")
+                print(f"   {str(err)[:300]}{'...' if len(str(err)) > 300 else ''}\n")
+                print("Edit llmgate.yaml (try a different model — e.g. "
+                      "gemini-2.5-flash or gemini-1.5-flash) and rerun.")
+                return
             board.place(move, ai_mark)
             print(f"AI plays {move}. ({reason})\n")
 
@@ -150,3 +158,5 @@ def main() -> None:
         play()
     except KeyboardInterrupt:
         print("\nbye.")
+    except LLMGateError as err:
+        print(f"\n!! LLM setup failed ({type(err).__name__}): {err}")
