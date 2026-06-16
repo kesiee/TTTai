@@ -1,0 +1,24 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+*.egg-info/
+
+# Env / secrets
+.env
+.env.*
+llmgate.yaml
+*.key
+
+# Editors / OS
+.vscode/
+.idea/
+.DS_Store
+.claude/settings.local.json
+
+# Build / dist
+build/
+dist/
+.eggs/

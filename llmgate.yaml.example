@@ -1,0 +1,18 @@
+# Copy to llmgate.yaml and fill in. The game can also prompt you at runtime
+# and write this file for you. llmgate.yaml is gitignored, so your key stays local.
+
+provider: anthropic
+model: claude-sonnet-4-5
+api_key: ${ANTHROPIC_API_KEY}
+temperature: 0.2
+max_tokens: 200
+
+# Other quick options — swap the block above:
+#
+# provider: openai
+# model: gpt-4o-mini
+# api_key: ${OPENAI_API_KEY}
+#
+# provider: groq
+# model: llama-3.1-8b-instant
+# api_key: ${GROQ_API_KEY}
